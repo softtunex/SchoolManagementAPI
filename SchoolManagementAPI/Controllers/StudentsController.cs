@@ -108,7 +108,7 @@ namespace SchoolManagementAPI.Controllers
                     Address = studentDTO.Address,
                     ParentContact = studentDTO.ParentContact,
                     Level = studentDTO.Level
-                };
+                }; 
                 var addedStudent = await _studentService.AddStudent(student); // Get the added student
                 _logger.LogInformation($"Student {student.FirstName} {student.LastName} added successfully");
                 return CreatedAtAction(nameof(GetStudent), new { id = addedStudent.StudentId }, addedStudent);
