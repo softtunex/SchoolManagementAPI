@@ -53,13 +53,13 @@ namespace SchoolManagementAPI.Controllers
         // PUT: api/Students/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("UpdateStudent/{id}")]
-        public async Task<IActionResult> PutStudent(int id,[FromBody] StudentDTO studentDTO,Student stdt)
+        public async Task<IActionResult> PutStudent(int id,[FromBody] UpdateStudentDTO updateStudentDTO)
         {
             if(!ModelState.IsValid){ 
                 return BadRequest(ModelState); 
             }
 
-            if (id != stdt.StudentId)
+            if (id != updateStudentDTO.StudentId)
             {
                 _logger.LogWarning("ID mismatch");
                 return BadRequest();
@@ -70,13 +70,13 @@ namespace SchoolManagementAPI.Controllers
             {
                 var student = new Student
                 {
-                    FirstName = studentDTO.FirstName,
-                    LastName = studentDTO.LastName,
-                    DateOfBirth = studentDTO.DateOfBirth,
-                    Gender = studentDTO.Gender,
-                    Address = studentDTO.Address,
-                    ParentContact = studentDTO.ParentContact,
-                    Level = studentDTO.Level
+                    FirstName = updateStudentDTO.FirstName,
+                    LastName = updateStudentDTO.LastName,
+                    DateOfBirth = updateStudentDTO.DateOfBirth,
+                    Gender = updateStudentDTO.Gender,
+                    Address = updateStudentDTO.Address,
+                    ParentContact = updateStudentDTO.ParentContact,
+                    Level = updateStudentDTO.Level
                 };
                 var updatedStudent = await _studentService.UpdateStudent(student); // Get the updated student
                 _logger.LogInformation($"Student {student.FirstName} {student.LastName} updated successfully");
